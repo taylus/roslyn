@@ -1,5 +1,5 @@
-# Roslyn C# Compilation Demo
-A C# program that compiles another C# program and runs it dynamically.
+# Roslyn C# and VB.NET Compilation Demo
+A C# program that compiles another C# or VB.NET program and runs it dynamically.
 
 The program being compiled:
 ```csharp

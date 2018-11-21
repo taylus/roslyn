@@ -7,8 +7,8 @@ namespace Roslyn.Demo
     {
         public static void Main(string[] args)
         {
-            var compiler = new Compiler();
-            byte[] il = compiler.Compile.FromFile("input/HelloWorld.cs", assemblyName: "HelloWorld");
+            var compiler = new VBCompiler();
+            byte[] il = compiler.Compile.FromFile("input/HelloWorld.vb", assemblyName: "HelloWorld");
 
             var assembly = Assembly.Load(il);
             Console.WriteLine($"Compiled [{assembly}]");
