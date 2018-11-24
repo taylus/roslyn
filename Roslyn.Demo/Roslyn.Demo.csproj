@@ -6,21 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="input\HelloWorld.cs" />
+    <Compile Remove="Input\HelloWorld.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="input\HelloWorld.vb" />
+    <None Remove="Input\HelloWorld.vb" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="input\HelloWorld.vb">
+    <Content Include="Input\HelloWorld.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="input\HelloWorld.cs">
+    <Content Include="Input\HelloWorld.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

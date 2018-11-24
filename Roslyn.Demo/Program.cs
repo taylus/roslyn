@@ -7,7 +7,6 @@ namespace Roslyn.Demo
     {
         public static void Main(string[] args)
         {
-            //TODO: turn into unit tests
             CompileAndRunCSharpDemo();
             Console.WriteLine();
             CompileAndRunVBDemo();
