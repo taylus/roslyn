@@ -15,7 +15,7 @@ namespace Roslyn.Demo
         private static void CompileAndRunCSharpDemo()
         {
             var compiler = new CSharpCompiler();
-            byte[] il = compiler.Compile.FromFile("input/HelloWorld.cs", assemblyName: "CSHelloWorld");
+            byte[] il = compiler.Compile.FromFile("Input/HelloWorld.cs", assemblyName: "CSHelloWorld");
 
             var assembly = Assembly.Load(il);
             Console.WriteLine($"Compiled [{assembly}]");
@@ -27,7 +27,7 @@ namespace Roslyn.Demo
         private static void CompileAndRunVBDemo()
         {
             var compiler = new VBCompiler();
-            byte[] il = compiler.Compile.FromFile("input/HelloWorld.vb", assemblyName: "VBHelloWorld");
+            byte[] il = compiler.Compile.FromFile("Input/HelloWorld.vb", assemblyName: "VBHelloWorld");
 
             var assembly = Assembly.Load(il);
             Console.WriteLine($"Compiled [{assembly}]");
