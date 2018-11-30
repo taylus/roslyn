@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
@@ -20,9 +22,10 @@ namespace Roslyn.Demo
             return SyntaxFactory.ParseSyntaxTree(stringText);
         }
 
-        private static Compilation CompileAssembly(SyntaxTree syntaxTree, string assemblyName)
+        private static Compilation CompileAssembly(SyntaxTree syntaxTree, string assemblyName, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            return CSharpCompilation.Create(assemblyName, new SyntaxTree[] { syntaxTree }, ReferenceResolver.GetDefaultReferences(), DefaultCompilationOptions);
+            var references = ReferenceResolver.GetDefaultReferences().Concat(additionalReferences ?? Enumerable.Empty<MetadataReference>());
+            return CSharpCompilation.Create(assemblyName, new SyntaxTree[] { syntaxTree }, references, DefaultCompilationOptions);
         }
 
         public CompilerFrontend Compile { get; } = new CompilerFrontend() { Parse = Parse, Compile = CompileAssembly };

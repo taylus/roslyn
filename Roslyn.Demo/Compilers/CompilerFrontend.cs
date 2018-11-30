@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Demo
@@ -7,24 +8,24 @@ namespace Roslyn.Demo
     public class CompilerFrontend
     {
         public Func<string, SyntaxTree> Parse { get; set; }
-        public Func<SyntaxTree, string, Compilation> Compile { get; set; }
+        public Func<SyntaxTree, string, IEnumerable<MetadataReference>, Compilation> Compile { get; set; }
 
         /// <summary>
         /// Compiles the given source file into an IL byte array.
         /// </summary>
-        public byte[] FromFile(string filename, string assemblyName)
+        public byte[] FromFile(string filename, string assemblyName, IEnumerable<MetadataReference> additionalReferences = null)
         {
             string source = File.ReadAllText(filename);
-            return FromString(source, assemblyName);
+            return FromString(source, assemblyName, additionalReferences);
         }
 
         /// <summary>
         /// Compiles the given string of source code into an IL byte array.
         /// </summary>
-        public byte[] FromString(string code, string assemblyName)
+        public byte[] FromString(string code, string assemblyName, IEnumerable<MetadataReference> additionalReferences = null)
         {
             var parsedSyntaxTree = Parse(code);
-            var compilation = Compile(parsedSyntaxTree, assemblyName);
+            var compilation = Compile(parsedSyntaxTree, assemblyName, additionalReferences);
 
             using (var stream = new MemoryStream())
             {
