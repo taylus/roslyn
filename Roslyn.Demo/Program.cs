@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Xunit;
@@ -51,18 +50,8 @@ namespace Roslyn.Demo
 
         private static void RunTestMethods(Assembly assembly)
         {
-            //TODO: use Xunit's AssemblyRunner instead?
-            //https://stackoverflow.com/a/45153763
-
-            var testMethods = assembly.GetTypes().SelectMany(t => t.GetMethods())
-                .Where(m => m.GetCustomAttribute(typeof(FactAttribute), false) != null);
-
-            foreach (var testMethod in testMethods)
-            {
-                Console.WriteLine($"Running test method {testMethod}...");
-                var instance = Activator.CreateInstance(testMethod.DeclaringType);
-                testMethod.Invoke(instance, null);
-            }
+            TestRunner.TestFacts(assembly);
+            TestRunner.TestTheories(assembly);
         }
 
         private static string GetFullName(MethodInfo method) => method.DeclaringType.FullName + "." + method.Name;
